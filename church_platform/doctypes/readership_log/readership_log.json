@@ -1,0 +1,85 @@
+{
+  "autoname": "format:LOG-{YYYY}{MM}{DD}-{#####}",
+  "creation": "2026-07-23T19:00:00.000000",
+  "docstatus": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "content_type",
+    "content_id",
+    "member",
+    "view_date",
+    "time_spent",
+    "device_type",
+    "view_source"
+  ],
+  "fields": [
+    {
+      "fieldname": "content_type",
+      "fieldtype": "Select",
+      "label": "Content Type",
+      "options": "Announcement\nEvent\nBlog Post\nAchievement",
+      "reqd": 1
+    },
+    {
+      "fieldname": "content_id",
+      "fieldtype": "Data",
+      "label": "Content ID",
+      "reqd": 1
+    },
+    {
+      "fieldname": "member",
+      "fieldtype": "Link",
+      "label": "Member",
+      "options": "Member",
+      "reqd": 1
+    },
+    {
+      "fieldname": "view_date",
+      "fieldtype": "Datetime",
+      "label": "View Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "time_spent",
+      "fieldtype": "Int",
+      "label": "Time Spent (seconds)"
+    },
+    {
+      "fieldname": "device_type",
+      "fieldtype": "Select",
+      "label": "Device Type",
+      "options": "Desktop\nMobile\nTablet"
+    },
+    {
+      "fieldname": "view_source",
+      "fieldtype": "Select",
+      "label": "View Source",
+      "options": "Portal\nEmail\nSocial Share\nDirect Link"
+    }
+  ],
+  "links": [],
+  "modified": "2026-07-23T19:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Analytics",
+  "name": "Readership Log",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "submit": 0,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

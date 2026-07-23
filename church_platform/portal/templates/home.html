@@ -1,0 +1,335 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<div class="portal-container">
+    <div class="portal-header">
+        <div class="header-content">
+            <h1>Welcome back, {{ member.member_name }}!</h1>
+            <p class="subtitle">Church Platform Portal</p>
+        </div>
+        <div class="header-actions">
+            <a href="/portal/notifications" class="btn btn-sm btn-link">
+                <i class="fa fa-bell"></i> Notifications
+            </a>
+            <a href="/portal/profile" class="btn btn-sm btn-link">
+                <i class="fa fa-user"></i> Profile
+            </a>
+        </div>
+    </div>
+
+    <div class="portal-main">
+        <div class="row">
+            <div class="col-md-8">
+                <!-- Recent Posts -->
+                <div class="portal-section">
+                    <h3 class="section-title">
+                        <i class="fa fa-file-text"></i> Recent Posts
+                    </h3>
+                    {% if recent_posts %}
+                        <div class="posts-list">
+                            {% for post in recent_posts[:3] %}
+                                <div class="post-card">
+                                    <h4><a href="/portal/post/{{ post.name }}">{{ post.title }}</a></h4>
+                                    <p class="meta">By {{ post.author }} on {{ post.published_date.strftime('%b %d, %Y') }}</p>
+                                    <p class="excerpt">{{ post.content[:150] }}...</p>
+                                    <div class="post-footer">
+                                        <span class="badge">{{ post.views }} reads</span>
+                                        <a href="/portal/post/{{ post.name }}" class="btn btn-sm btn-link">Read More →</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <a href="/portal/feed" class="btn btn-link">View all posts →</a>
+                    {% else %}
+                        <p class="text-muted">No posts yet. Check back soon!</p>
+                    {% endif %}
+                </div>
+
+                <!-- Upcoming Events -->
+                <div class="portal-section">
+                    <h3 class="section-title">
+                        <i class="fa fa-calendar"></i> Upcoming Events
+                    </h3>
+                    {% if upcoming_events %}
+                        <div class="events-list">
+                            {% for event in upcoming_events[:3] %}
+                                <div class="event-card">
+                                    <div class="event-date">
+                                        <div class="date-box">
+                                            {{ event.event_date.strftime('%b') }}<br>
+                                            <strong>{{ event.event_date.strftime('%d') }}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="event-details">
+                                        <h4><a href="/portal/event/{{ event.name }}">{{ event.title }}</a></h4>
+                                        <p class="meta">Organized by {{ event.organized_by }}</p>
+                                        <a href="/portal/event/{{ event.name }}" class="btn btn-sm btn-primary">RSVP →</a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <a href="/portal/events" class="btn btn-link">View all events →</a>
+                    {% else %}
+                        <p class="text-muted">No upcoming events. Stay tuned!</p>
+                    {% endif %}
+                </div>
+
+                <!-- Recent Comments -->
+                <div class="portal-section">
+                    <h3 class="section-title">
+                        <i class="fa fa-comments"></i> My Recent Comments
+                    </h3>
+                    {% if recent_comments %}
+                        <div class="comments-list">
+                            {% for comment in recent_comments %}
+                                <div class="comment-item">
+                                    <p class="comment-text">{{ comment.content[:100] }}...</p>
+                                    <p class="meta">On {{ comment.created_on.strftime('%b %d, %Y') }}</p>
+                                    <span class="badge badge-{{ comment.status.lower() }}">{{ comment.status }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-muted">You haven't commented yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Quick Stats -->
+                <div class="portal-section stats-card">
+                    <h4>Your Activity</h4>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ member.engagement_score or 0 }}</span>
+                        <span class="stat-label">Engagement Points</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ recent_comments|length }}</span>
+                        <span class="stat-label">Comments Posted</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ upcoming_events|length }}</span>
+                        <span class="stat-label">Events RSVP'd</span>
+                    </div>
+                </div>
+
+                <!-- Member Info -->
+                <div class="portal-section member-card">
+                    <div class="member-header">
+                        {% if member.profile_image %}
+                            <img src="{{ member.profile_image }}" alt="{{ member.member_name }}" class="member-avatar">
+                        {% else %}
+                            <div class="member-avatar placeholder">
+                                <i class="fa fa-user"></i>
+                            </div>
+                        {% endif %}
+                        <h4>{{ member.member_name }}</h4>
+                        <p class="meta">{{ member.parent_church }}</p>
+                    </div>
+                    <div class="member-actions">
+                        <a href="/portal/profile" class="btn btn-sm btn-block">Edit Profile</a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Navigation -->
+                <div class="portal-section">
+                    <h4>Quick Links</h4>
+                    <ul class="quick-links">
+                        <li><a href="/portal/feed"><i class="fa fa-newspaper-o"></i> Browse Feed</a></li>
+                        <li><a href="/portal/events"><i class="fa fa-calendar"></i> All Events</a></li>
+                        <li><a href="/portal/profile"><i class="fa fa-user"></i> My Profile</a></li>
+                        <li><a href="/portal/notifications"><i class="fa fa-bell"></i> Notifications</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .portal-container {
+        background: #f5f5f5;
+        min-height: 100vh;
+    }
+
+    .portal-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .portal-header h1 {
+        margin: 0;
+        font-size: 28px;
+    }
+
+    .subtitle {
+        margin: 5px 0 0 0;
+        opacity: 0.9;
+    }
+
+    .header-actions a {
+        color: white;
+        margin-left: 15px;
+        text-decoration: none;
+    }
+
+    .portal-main {
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .portal-section {
+        background: white;
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .section-title {
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 18px;
+        color: #333;
+        border-bottom: 2px solid #667eea;
+        padding-bottom: 10px;
+    }
+
+    .post-card, .event-card {
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .post-card:last-child, .event-card:last-child {
+        border-bottom: none;
+    }
+
+    .post-card h4, .event-card h4 {
+        margin: 0 0 10px 0;
+    }
+
+    .post-card a, .event-card a {
+        color: #667eea;
+        text-decoration: none;
+    }
+
+    .meta {
+        font-size: 12px;
+        color: #999;
+        margin: 5px 0;
+    }
+
+    .excerpt {
+        margin: 10px 0;
+        color: #666;
+        line-height: 1.5;
+    }
+
+    .post-footer, .event-footer {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .stats-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .stat-item {
+        margin: 15px 0;
+        text-align: center;
+    }
+
+    .stat-number {
+        display: block;
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    .stat-label {
+        display: block;
+        font-size: 12px;
+        opacity: 0.9;
+    }
+
+    .member-card {
+        text-align: center;
+    }
+
+    .member-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
+
+    .member-avatar.placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #ddd;
+        font-size: 32px;
+    }
+
+    .quick-links {
+        list-style: none;
+        padding: 0;
+    }
+
+    .quick-links li {
+        margin: 10px 0;
+    }
+
+    .quick-links a {
+        color: #667eea;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .quick-links a:hover {
+        text-decoration: underline;
+    }
+
+    .badge {
+        display: inline-block;
+        background: #667eea;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background: #667eea;
+        color: white;
+    }
+
+    .btn-link {
+        background: none;
+        color: #667eea;
+        padding: 0;
+    }
+
+    .btn-block {
+        display: block;
+        width: 100%;
+    }
+</style>
+{% endblock %}

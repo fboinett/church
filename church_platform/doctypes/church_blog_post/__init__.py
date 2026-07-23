@@ -1,0 +1,1 @@
+# Church Blog Post module
