@@ -60,3 +60,52 @@ class ChurchBlogPost(frappe.Model):
 		"""Increment view count"""
 		self.views_count = (self.views_count or 0) + 1
 		frappe.db.set_value(self.doctype, self.name, "views_count", self.views_count)
+	
+	def get_share_links(self):
+		"""Get all social media share links for this blog post"""
+		from church_platform.sharing.utils import ContentSharingManager
+		
+		excerpt = self.excerpt or (self.content[:160] + "...") if self.content else ""
+		
+		return ContentSharingManager.create_share_links(
+			self.doctype,
+			self.name,
+			self.title,
+			excerpt,
+			self.featured_image,
+			self.author
+		)
+	
+	def get_share_stats(self):
+		"""Get sharing statistics for this blog post"""
+		from church_platform.doctypes.content_share.content_share import ContentShare
+		
+		return ContentShare.get_share_stats(self.doctype, self.name)
+	
+	def log_share(self, platform, device_type="Desktop"):
+		"""Log a share event"""
+		from church_platform.sharing.utils import ContentSharingManager
+		
+		# Get current user
+		user = frappe.session.user
+		member = frappe.db.get_value("Member", {"user": user}, "name")
+		
+		if member:
+			ContentSharingManager.log_share(self.doctype, self.name, member, platform, device_type=device_type)
+	
+	def get_og_meta_tags(self):
+		"""Get Open Graph meta tags for social preview"""
+		from church_platform.sharing.utils import OpenGraphMeta
+		
+		excerpt = self.excerpt or (self.content[:160] + "...") if self.content else ""
+		
+		og_tags = OpenGraphMeta.generate_tags(
+			self.doctype,
+			self.name,
+			self.title,
+			excerpt,
+			self.featured_image,
+			self.author
+		)
+		
+		return OpenGraphMeta.generate_html_meta_tags(og_tags)

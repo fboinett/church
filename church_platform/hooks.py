@@ -16,7 +16,16 @@ fixtures = [
 	{"dt": "Announcement", "filters": [["status", "=", "Published"]]},
 	{"dt": "Event", "filters": [["status", "!=", "Cancelled"]]},
 	{"dt": "Church Blog Post", "filters": [["status", "=", "Published"]]},
+	{"dt": "Content Share", "filters": [["name", "!=", ""]]},
 ]
+
+# Whitelisted API methods
+standard_queries = {
+	"church_platform.sharing.api.get_share_links",
+	"church_platform.sharing.api.log_share",
+	"church_platform.sharing.api.get_share_stats",
+	"church_platform.sharing.api.get_trending_content",
+}
 
 # Permissions for hierarchy and content
 has_permission = {

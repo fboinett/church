@@ -59,3 +59,35 @@ class Event(frappe.Model):
 			self.target_sub_region,
 			self.target_church
 		)
+	
+	def get_share_links(self):
+		"""Get all social media share links for this event"""
+		from church_platform.sharing.utils import ContentSharingManager
+		
+		excerpt = self.description[:160] + "..." if len(self.description) > 160 else self.description
+		
+		return ContentSharingManager.create_share_links(
+			self.doctype,
+			self.name,
+			self.title,
+			excerpt,
+			self.featured_image,
+			self.organizer
+		)
+	
+	def get_share_stats(self):
+		"""Get sharing statistics for this event"""
+		from church_platform.doctypes.content_share.content_share import ContentShare
+		
+		return ContentShare.get_share_stats(self.doctype, self.name)
+	
+	def log_share(self, platform, device_type="Desktop"):
+		"""Log a share event"""
+		from church_platform.sharing.utils import ContentSharingManager
+		
+		# Get current user
+		user = frappe.session.user
+		member = frappe.db.get_value("Member", {"user": user}, "name")
+		
+		if member:
+			ContentSharingManager.log_share(self.doctype, self.name, member, platform, device_type=device_type)
