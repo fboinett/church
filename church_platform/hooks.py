@@ -25,6 +25,36 @@ standard_queries = {
 	"church_platform.sharing.api.log_share",
 	"church_platform.sharing.api.get_share_stats",
 	"church_platform.sharing.api.get_trending_content",
+	# Dashboard APIs
+	"church_platform.dashboards.api.get_national_stats",
+	"church_platform.dashboards.api.get_engagement_trend",
+	"church_platform.dashboards.api.get_trending_posts",
+	"church_platform.dashboards.api.get_regional_breakdown",
+	"church_platform.dashboards.api.get_pending_approvals",
+	"church_platform.dashboards.api.get_regional_stats",
+	"church_platform.dashboards.api.get_monthly_engagement",
+	"church_platform.dashboards.api.get_recent_content",
+	"church_platform.dashboards.api.get_subregional_performance",
+	"church_platform.dashboards.api.get_active_events",
+	"church_platform.dashboards.api.get_top_authors",
+	"church_platform.dashboards.api.get_subregional_stats",
+	"church_platform.dashboards.api.get_subregional_engagement",
+	"church_platform.dashboards.api.get_church_performance",
+	"church_platform.dashboards.api.get_recent_activities",
+	"church_platform.dashboards.api.get_member_stats",
+	"church_platform.dashboards.api.get_content_calendar",
+	"church_platform.dashboards.api.get_church_stats",
+	"church_platform.dashboards.api.get_weekly_engagement",
+	"church_platform.dashboards.api.get_church_events",
+	"church_platform.dashboards.api.get_member_activity",
+	"church_platform.dashboards.api.get_church_posts",
+	"church_platform.dashboards.api.get_pending_moderation",
+	"church_platform.dashboards.api.get_member_welcome",
+	"church_platform.dashboards.api.get_my_achievements",
+	"church_platform.dashboards.api.get_personalized_feed",
+	"church_platform.dashboards.api.get_member_events",
+	"church_platform.dashboards.api.get_member_engagement_stats",
+	"church_platform.dashboards.api.get_member_comments",
 }
 
 # Permissions for hierarchy and content
@@ -36,3 +66,32 @@ has_permission = {
 	"Event": "church_platform.content_management.permissions.event_has_permission",
 	"Church Blog Post": "church_platform.content_management.permissions.blog_post_has_permission",
 }
+
+# Custom Reports
+reports = [
+	{
+		"report_name": "Engagement Report",
+		"report_title": "Engagement Analytics",
+		"ref_doctype": "Church Blog Post",
+		"module": "Church Platform"
+	},
+	{
+		"report_name": "Share Analytics Report",
+		"report_title": "Social Media Sharing Analytics",
+		"ref_doctype": "Content Share",
+		"module": "Church Platform"
+	},
+	{
+		"report_name": "Events Analytics Report",
+		"report_title": "Event Analytics and Attendance",
+		"ref_doctype": "Event",
+		"module": "Church Platform"
+	},
+	{
+		"report_name": "Regional Performance Report",
+		"report_title": "Regional Performance Dashboard",
+		"ref_doctype": "Region",
+		"module": "Church Platform"
+	},
+]
+
