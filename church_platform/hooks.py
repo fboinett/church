@@ -2,7 +2,7 @@ app_name = "church_platform"
 app_title = "Church Platform"
 app_publisher = "Church Platform Team"
 app_description = "Comprehensive hierarchical content management and engagement system for church organizations"
-app_email = "support@churchplatform.local"
+app_email = "info@instentech.co.ke"
 app_license = "MIT"
 app_version = "1.0.0"
 
