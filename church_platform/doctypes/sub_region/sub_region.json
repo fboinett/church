@@ -1,0 +1,109 @@
+{
+  "autoname": "field:sub_region_code",
+  "creation": "2026-07-23T19:00:00.000000",
+  "docstatus": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "sub_region_code",
+    "name",
+    "region",
+    "description",
+    "sub_regional_leader",
+    "contact_section",
+    "contact_email",
+    "contact_phone",
+    "address",
+    "status_section",
+    "is_active"
+  ],
+  "fields": [
+    {
+      "fieldname": "sub_region_code",
+      "fieldtype": "Data",
+      "label": "Sub-Region Code",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "name",
+      "fieldtype": "Data",
+      "label": "Sub-Region Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "region",
+      "fieldtype": "Link",
+      "label": "Region",
+      "options": "Region",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text Editor",
+      "label": "Description"
+    },
+    {
+      "fieldname": "sub_regional_leader",
+      "fieldtype": "Link",
+      "label": "Sub-Regional Leader",
+      "options": "Church Leader",
+      "reqd": 1
+    },
+    {
+      "fieldname": "contact_section",
+      "fieldtype": "Section Break",
+      "label": "Contact Information"
+    },
+    {
+      "fieldname": "contact_email",
+      "fieldtype": "Email",
+      "label": "Contact Email"
+    },
+    {
+      "fieldname": "contact_phone",
+      "fieldtype": "Data",
+      "label": "Contact Phone"
+    },
+    {
+      "fieldname": "address",
+      "fieldtype": "Text",
+      "label": "Address"
+    },
+    {
+      "fieldname": "status_section",
+      "fieldtype": "Section Break",
+      "label": "Status"
+    },
+    {
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "label": "Is Active",
+      "default": 1
+    }
+  ],
+  "links": [],
+  "modified": "2026-07-23T19:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Hierarchy",
+  "name": "Sub Region",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "submit": 0,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

@@ -1,0 +1,5 @@
+Hierarchy
+User Management
+Content Management
+Publications
+Analytics
