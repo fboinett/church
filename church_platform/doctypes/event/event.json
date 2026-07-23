@@ -1,0 +1,167 @@
+{
+  "autoname": "format:EVT-{YYYY}{MM}{DD}-{#####}",
+  "creation": "2026-07-23T19:00:00.000000",
+  "docstatus": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "title",
+    "description",
+    "event_date",
+    "end_date",
+    "location",
+    "organizer",
+    "category",
+    "targeting_section",
+    "target_level",
+    "target_region",
+    "target_sub_region",
+    "target_church",
+    "featured_image",
+    "status",
+    "details_section",
+    "max_attendees",
+    "registration_required",
+    "allow_comments",
+    "allow_sharing"
+  ],
+  "fields": [
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "label": "Title",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text Editor",
+      "label": "Description",
+      "reqd": 1
+    },
+    {
+      "fieldname": "event_date",
+      "fieldtype": "Datetime",
+      "label": "Event Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "end_date",
+      "fieldtype": "Datetime",
+      "label": "End Date"
+    },
+    {
+      "fieldname": "location",
+      "fieldtype": "Data",
+      "label": "Location",
+      "reqd": 1
+    },
+    {
+      "fieldname": "organizer",
+      "fieldtype": "Link",
+      "label": "Organizer",
+      "options": "Church Leader",
+      "reqd": 1
+    },
+    {
+      "fieldname": "category",
+      "fieldtype": "Select",
+      "label": "Category",
+      "options": "Service\nPrayer Meeting\nTraining\nFellowship\nConference\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "targeting_section",
+      "fieldtype": "Section Break",
+      "label": "Targeting"
+    },
+    {
+      "fieldname": "target_level",
+      "fieldtype": "Select",
+      "label": "Target Level",
+      "options": "National\nRegional\nSub-Regional\nLocal",
+      "reqd": 1
+    },
+    {
+      "fieldname": "target_region",
+      "fieldtype": "Link",
+      "label": "Target Region",
+      "options": "Region"
+    },
+    {
+      "fieldname": "target_sub_region",
+      "fieldtype": "Link",
+      "label": "Target Sub-Region",
+      "options": "Sub Region"
+    },
+    {
+      "fieldname": "target_church",
+      "fieldtype": "Link",
+      "label": "Target Church",
+      "options": "Church"
+    },
+    {
+      "fieldname": "featured_image",
+      "fieldtype": "Attach Image",
+      "label": "Featured Image"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Planned\nOngoing\nCompleted\nCancelled",
+      "default": "Planned",
+      "reqd": 1
+    },
+    {
+      "fieldname": "details_section",
+      "fieldtype": "Section Break",
+      "label": "Details"
+    },
+    {
+      "fieldname": "max_attendees",
+      "fieldtype": "Int",
+      "label": "Max Attendees"
+    },
+    {
+      "fieldname": "registration_required",
+      "fieldtype": "Check",
+      "label": "Registration Required"
+    },
+    {
+      "fieldname": "allow_comments",
+      "fieldtype": "Check",
+      "label": "Allow Comments",
+      "default": 1
+    },
+    {
+      "fieldname": "allow_sharing",
+      "fieldtype": "Check",
+      "label": "Allow Sharing",
+      "default": 1
+    }
+  ],
+  "links": [],
+  "modified": "2026-07-23T19:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Content Management",
+  "name": "Event",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "submit": 0,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

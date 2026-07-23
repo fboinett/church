@@ -13,11 +13,17 @@ fixtures = [
 	{"dt": "Church", "filters": [["name", "!=", ""]]},
 	{"dt": "Church Leader", "filters": [["name", "!=", ""]]},
 	{"dt": "Member", "filters": [["name", "!=", ""]]},
+	{"dt": "Announcement", "filters": [["status", "=", "Published"]]},
+	{"dt": "Event", "filters": [["status", "!=", "Cancelled"]]},
+	{"dt": "Church Blog Post", "filters": [["status", "=", "Published"]]},
 ]
 
-# Permissions for hierarchy
+# Permissions for hierarchy and content
 has_permission = {
 	"Region": "church_platform.hierarchy.permissions.region_has_permission",
 	"Sub Region": "church_platform.hierarchy.permissions.subregion_has_permission",
 	"Church": "church_platform.hierarchy.permissions.church_has_permission",
+	"Announcement": "church_platform.content_management.permissions.announcement_has_permission",
+	"Event": "church_platform.content_management.permissions.event_has_permission",
+	"Church Blog Post": "church_platform.content_management.permissions.blog_post_has_permission",
 }
