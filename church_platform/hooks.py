@@ -55,6 +55,15 @@ standard_queries = {
 	"church_platform.dashboards.api.get_member_events",
 	"church_platform.dashboards.api.get_member_engagement_stats",
 	"church_platform.dashboards.api.get_member_comments",
+	# Portal APIs
+	"church_platform.portal.api.submit_comment",
+	"church_platform.portal.api.rsvp_event",
+	"church_platform.portal.api.update_member_profile",
+	"church_platform.portal.api.get_member_notifications",
+	"church_platform.portal.api.mark_notification_read",
+	"church_platform.portal.api.share_content",
+	"church_platform.portal.api.search_content",
+	"church_platform.portal.api.get_portal_announcements",
 }
 
 # Permissions for hierarchy and content

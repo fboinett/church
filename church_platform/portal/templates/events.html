@@ -1,0 +1,201 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<div class="portal-container">
+    <div class="portal-nav">
+        <a href="/portal/home" class="btn btn-link"><i class="fa fa-arrow-left"></i> Back to Home</a>
+    </div>
+
+    <div class="portal-main">
+        <h2>Events Calendar</h2>
+
+        {% if upcoming_events %}
+            <div class="events-grid">
+                {% for event in upcoming_events %}
+                    <div class="event-card event-{{ event.target_level.lower().replace('-', '') }}">
+                        <div class="event-date-box">
+                            <div class="month">{{ event.event_date.strftime('%b') }}</div>
+                            <div class="day">{{ event.event_date.strftime('%d') }}</div>
+                            <div class="year">{{ event.event_date.strftime('%Y') }}</div>
+                        </div>
+                        <div class="event-card-content">
+                            <h3><a href="/portal/event/{{ event.name }}">{{ event.title }}</a></h3>
+                            <p class="organizer">
+                                <i class="fa fa-user"></i> {{ event.organized_by }}
+                            </p>
+                            <p class="level-badge">
+                                <span class="badge badge-{{ event.target_level.lower().replace('-', '') }}">
+                                    {{ event.target_level }}
+                                </span>
+                            </p>
+                            
+                            {% if event.name in member_rsvps %}
+                                <div class="rsvp-status">
+                                    <span class="badge badge-success">RSVP: {{ member_rsvps[event.name] }}</span>
+                                </div>
+                            {% else %}
+                                <a href="/portal/event/{{ event.name }}" class="btn btn-sm btn-primary">RSVP Now</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                <p>No upcoming events. Stay tuned!</p>
+            </div>
+        {% endif %}
+
+        <!-- Your RSVPs Section -->
+        {% if member_rsvps %}
+            <h3 style="margin-top: 40px;">Your RSVPs</h3>
+            <div class="rsvp-list">
+                {% for event_id, status in member_rsvps.items() %}
+                    <div class="rsvp-item">
+                        <div class="rsvp-status-badge badge badge-{{ status.lower() }}">{{ status }}</div>
+                        <div class="rsvp-info">
+                            <p><strong>Event ID:</strong> {{ event_id }}</p>
+                            <p class="text-muted">Status: {{ status }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+    .events-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+    }
+
+    .event-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        display: flex;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .event-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .event-date-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 15px;
+        text-align: center;
+        min-width: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .event-date-box .month {
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .event-date-box .day {
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .event-date-box .year {
+        font-size: 11px;
+    }
+
+    .event-card-content {
+        padding: 15px;
+        flex: 1;
+    }
+
+    .event-card-content h3 {
+        margin: 0 0 10px 0;
+        font-size: 16px;
+    }
+
+    .event-card-content a {
+        color: #667eea;
+        text-decoration: none;
+    }
+
+    .organizer {
+        margin: 5px 0;
+        font-size: 12px;
+        color: #666;
+    }
+
+    .level-badge {
+        margin: 10px 0;
+    }
+
+    .rsvp-status {
+        margin: 10px 0 0 0;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: bold;
+    }
+
+    .badge-national {
+        background: #667eea;
+        color: white;
+    }
+
+    .badge-regional {
+        background: #48c774;
+        color: white;
+    }
+
+    .badge-subregional {
+        background: #fb6a4a;
+        color: white;
+    }
+
+    .badge-local {
+        background: #ffc107;
+        color: white;
+    }
+
+    .badge-success {
+        background: #28a745;
+        color: white;
+    }
+
+    .rsvp-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .rsvp-item {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .alert {
+        background: #f0f8ff;
+        border: 1px solid #b3d9ff;
+        color: #004085;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px 0;
+    }
+</style>
+{% endblock %}

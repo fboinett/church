@@ -1,0 +1,312 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<div class="portal-container">
+    <div class="portal-nav">
+        <a href="/portal/feed" class="btn btn-link"><i class="fa fa-arrow-left"></i> Back to Feed</a>
+    </div>
+
+    <div class="portal-main">
+        <article class="post-detail">
+            <header class="post-header">
+                <h1>{{ post.title }}</h1>
+                <div class="post-meta">
+                    <span class="author">By {{ post.author }}</span>
+                    <span class="date">{{ post.published_date.strftime('%B %d, %Y') }}</span>
+                    <span class="views"><i class="fa fa-eye"></i> {{ post.views }} reads</span>
+                </div>
+            </header>
+
+            <div class="post-content">
+                {{ post.content }}
+            </div>
+
+            <!-- Attachments -->
+            {% if post.attachments %}
+                <div class="post-attachments">
+                    <h3>Attachments</h3>
+                    <ul class="attachment-list">
+                        {% for attachment in post.attachments %}
+                            <li>
+                                <i class="fa fa-file"></i>
+                                <a href="{{ attachment.attachment_url }}" target="_blank">
+                                    {{ attachment.file_name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <!-- Sharing -->
+            {% if share_links %}
+                <div class="post-sharing">
+                    <h3>Share This Post</h3>
+                    <div class="share-buttons">
+                        {% for platform, link in share_links.items() %}
+                            <a href="{{ link }}" target="_blank" class="share-btn share-{{ platform.lower() }}">
+                                <i class="fa fa-{{ platform.lower() }}"></i>
+                                {{ platform }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Comments Section -->
+            <div class="comments-section">
+                <h3>Comments ({{ comments|length }})</h3>
+
+                <!-- Comment Form -->
+                {% if post.allow_comments %}
+                    <div class="comment-form">
+                        <h4>Leave a Comment</h4>
+                        <form id="commentForm">
+                            <textarea id="commentContent" name="content" placeholder="Share your thoughts..." 
+                                      class="form-control" rows="5" required></textarea>
+                            <button type="submit" class="btn btn-primary">Post Comment</button>
+                        </form>
+                        <div id="commentStatus" style="display: none;"></div>
+                    </div>
+                {% endif %}
+
+                <!-- Comments List -->
+                {% if comments %}
+                    <div class="comments-list">
+                        {% for comment in comments %}
+                            <div class="comment">
+                                <div class="comment-header">
+                                    <strong>{{ comment.commenter }}</strong>
+                                    <span class="comment-date">{{ comment.created_on.strftime('%b %d, %Y') }}</span>
+                                </div>
+                                <div class="comment-body">
+                                    {{ comment.content }}
+                                </div>
+                                <div class="comment-footer">
+                                    <span class="comment-status">Approved</span>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted">No comments yet. Be the first to comment!</p>
+                {% endif %}
+            </div>
+        </article>
+    </div>
+</div>
+
+<style>
+    .post-detail {
+        background: white;
+        border-radius: 8px;
+        padding: 40px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .post-header {
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    .post-header h1 {
+        margin: 0 0 15px 0;
+        font-size: 32px;
+    }
+
+    .post-meta {
+        display: flex;
+        gap: 20px;
+        font-size: 12px;
+        color: #999;
+    }
+
+    .post-meta span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .post-content {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #333;
+        margin: 30px 0;
+    }
+
+    .post-attachments {
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 30px 0;
+    }
+
+    .attachment-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .attachment-list li {
+        margin: 10px 0;
+    }
+
+    .attachment-list a {
+        color: #667eea;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .post-sharing {
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 30px 0;
+    }
+
+    .share-buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .share-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 8px 16px;
+        border-radius: 4px;
+        color: white;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .share-whatsapp { background: #25D366; }
+    .share-facebook { background: #1877F2; }
+    .share-twitter { background: #1DA1F2; }
+    .share-email { background: #666; }
+
+    .comments-section {
+        margin-top: 40px;
+        padding-top: 40px;
+        border-top: 2px solid #f0f0f0;
+    }
+
+    .comment-form {
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+    }
+
+    .comment-form h4 {
+        margin-top: 0;
+    }
+
+    .comment-form textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: inherit;
+        resize: vertical;
+    }
+
+    .comment-form button {
+        margin-top: 10px;
+    }
+
+    .comments-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .comment {
+        border-left: 3px solid #667eea;
+        padding-left: 15px;
+        padding: 15px;
+        background: #f9f9f9;
+        border-radius: 4px;
+    }
+
+    .comment-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .comment-date {
+        font-size: 12px;
+        color: #999;
+    }
+
+    .comment-body {
+        color: #333;
+        line-height: 1.6;
+    }
+
+    .comment-footer {
+        margin-top: 10px;
+        font-size: 11px;
+    }
+
+    .comment-status {
+        display: inline-block;
+        background: #28a745;
+        color: white;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-weight: bold;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 8px 16px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background: #667eea;
+        color: white;
+    }
+</style>
+
+<script>
+    document.getElementById('commentForm').onsubmit = function(e) {
+        e.preventDefault();
+        
+        const content = document.getElementById('commentContent').value;
+        const postId = '{{ post.name }}';
+        
+        frappe.call({
+            method: 'church_platform.portal.api.submit_comment',
+            args: {
+                blog_post: postId,
+                content: content
+            },
+            callback: function(r) {
+                if (r.message.status === 'success') {
+                    document.getElementById('commentStatus').style.display = 'block';
+                    document.getElementById('commentStatus').innerHTML = 
+                        '<div class="alert alert-success">' + r.message.message + '</div>';
+                    document.getElementById('commentForm').reset();
+                    
+                    // Reload comments after 2 seconds
+                    setTimeout(function() {
+                        location.reload();
+                    }, 2000);
+                }
+            }
+        });
+    }
+</script>
+{% endblock %}

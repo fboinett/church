@@ -1,0 +1,350 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<div class="portal-container">
+    <div class="portal-nav">
+        <a href="/portal/events" class="btn btn-link"><i class="fa fa-arrow-left"></i> Back to Events</a>
+    </div>
+
+    <div class="portal-main">
+        <div class="event-detail">
+            <header class="event-header">
+                <div class="event-date-large">
+                    <div class="date-display">
+                        <span class="month">{{ event.event_date.strftime('%B') }}</span>
+                        <span class="day">{{ event.event_date.strftime('%d') }}</span>
+                        <span class="year">{{ event.event_date.strftime('%Y') }}</span>
+                    </div>
+                </div>
+                <div class="event-title-section">
+                    <h1>{{ event.title }}</h1>
+                    <p class="event-organizer">
+                        <i class="fa fa-user"></i> Organized by {{ event.organized_by }}
+                    </p>
+                    <span class="badge badge-{{ event.target_level.lower().replace('-', '') }}">
+                        {{ event.target_level }}
+                    </span>
+                </div>
+            </header>
+
+            <div class="row event-details-row">
+                <div class="col-md-8">
+                    <!-- Event Description -->
+                    <div class="event-section">
+                        <h3>About This Event</h3>
+                        <div class="event-content">
+                            {{ event.content }}
+                        </div>
+                    </div>
+
+                    <!-- Event Details -->
+                    {% if event.location or event.time %}
+                        <div class="event-section">
+                            <h3>Event Details</h3>
+                            <div class="details-grid">
+                                {% if event.event_date %}
+                                    <div class="detail-item">
+                                        <strong><i class="fa fa-calendar"></i> Date & Time</strong>
+                                        <p>{{ event.event_date.strftime('%A, %B %d, %Y') }}
+                                           {% if event.event_time %}
+                                               at {{ event.event_time }}
+                                           {% endif %}
+                                        </p>
+                                    </div>
+                                {% endif %}
+                                {% if event.location %}
+                                    <div class="detail-item">
+                                        <strong><i class="fa fa-map-marker"></i> Location</strong>
+                                        <p>{{ event.location }}</p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <!-- Comments -->
+                    <div class="event-section">
+                        <h3>Comments (0)</h3>
+                        <p class="text-muted">Comments coming soon</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <!-- RSVP Card -->
+                    <div class="rsvp-card">
+                        <h3>Event Registration</h3>
+                        
+                        {% if member_rsvp_status %}
+                            <div class="alert alert-success">
+                                <strong>You're in!</strong><br>
+                                Status: <strong>{{ member_rsvp_status }}</strong>
+                            </div>
+                            <button class="btn btn-block btn-secondary" id="cancelRsvpBtn">
+                                Cancel RSVP
+                            </button>
+                        {% else %}
+                            <button class="btn btn-block btn-primary" id="rsvpBtn">
+                                <i class="fa fa-check"></i> I'm Attending
+                            </button>
+                            <button class="btn btn-block btn-outline" id="maybeRsvpBtn">
+                                Maybe Attending
+                            </button>
+                        {% endif %}
+                    </div>
+
+                    <!-- Event Stats -->
+                    <div class="stats-card">
+                        <h4>Event Stats</h4>
+                        <div class="stat">
+                            <span class="label">People Attending</span>
+                            <span class="value">0</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Views</span>
+                            <span class="value">{{ event.views or 0 }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Share Event -->
+                    <div class="share-card">
+                        <h4>Share Event</h4>
+                        <div class="share-buttons-vertical">
+                            <a href="#" class="share-btn" data-platform="whatsapp">
+                                <i class="fa fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <a href="#" class="share-btn" data-platform="facebook">
+                                <i class="fa fa-facebook"></i> Facebook
+                            </a>
+                            <a href="#" class="share-btn" data-platform="twitter">
+                                <i class="fa fa-twitter"></i> Twitter
+                            </a>
+                            <a href="#" class="share-btn" data-platform="email">
+                                <i class="fa fa-envelope"></i> Email
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .event-detail {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .event-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 40px;
+        display: flex;
+        gap: 30px;
+    }
+
+    .event-date-large {
+        flex-shrink: 0;
+    }
+
+    .date-display {
+        background: rgba(255,255,255,0.2);
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        min-width: 100px;
+    }
+
+    .date-display span {
+        display: block;
+    }
+
+    .date-display .month {
+        font-size: 12px;
+        text-transform: uppercase;
+        opacity: 0.8;
+    }
+
+    .date-display .day {
+        font-size: 36px;
+        font-weight: bold;
+        margin: 5px 0;
+    }
+
+    .date-display .year {
+        font-size: 12px;
+        opacity: 0.8;
+    }
+
+    .event-title-section h1 {
+        margin: 0 0 15px 0;
+        font-size: 28px;
+    }
+
+    .event-organizer {
+        margin: 10px 0;
+        opacity: 0.9;
+    }
+
+    .event-section {
+        padding: 30px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .event-section:last-child {
+        border-bottom: none;
+    }
+
+    .event-content {
+        line-height: 1.8;
+        font-size: 16px;
+    }
+
+    .details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .detail-item {
+        padding: 15px;
+        background: #f9f9f9;
+        border-radius: 8px;
+    }
+
+    .detail-item strong {
+        display: block;
+        margin-bottom: 10px;
+        color: #667eea;
+    }
+
+    .detail-item p {
+        margin: 0;
+    }
+
+    .rsvp-card, .stats-card, .share-card {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .alert {
+        background: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+        padding: 12px;
+        border-radius: 4px;
+        margin-bottom: 15px;
+    }
+
+    .btn {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        border-radius: 4px;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .btn-primary {
+        background: #667eea;
+        color: white;
+    }
+
+    .btn-secondary {
+        background: #6c757d;
+        color: white;
+    }
+
+    .btn-outline {
+        background: white;
+        color: #667eea;
+        border: 2px solid #667eea;
+    }
+
+    .stat {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .stat:last-child {
+        border-bottom: none;
+    }
+
+    .stat .value {
+        font-weight: bold;
+        color: #667eea;
+    }
+
+    .share-buttons-vertical {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .share-btn {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        border-radius: 4px;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .share-btn[data-platform="whatsapp"] { background: #25D366; }
+    .share-btn[data-platform="facebook"] { background: #1877F2; }
+    .share-btn[data-platform="twitter"] { background: #1DA1F2; }
+    .share-btn[data-platform="email"] { background: #666; }
+</style>
+
+<script>
+    document.getElementById('rsvpBtn')?.onclick = function() {
+        frappe.call({
+            method: 'church_platform.portal.api.rsvp_event',
+            args: { event_id: '{{ event.name }}', status: 'Confirmed' },
+            callback: function(r) {
+                if (r.message.status === 'success') {
+                    location.reload();
+                }
+            }
+        });
+    }
+
+    document.getElementById('maybeRsvpBtn')?.onclick = function() {
+        frappe.call({
+            method: 'church_platform.portal.api.rsvp_event',
+            args: { event_id: '{{ event.name }}', status: 'Maybe' },
+            callback: function(r) {
+                if (r.message.status === 'success') {
+                    location.reload();
+                }
+            }
+        });
+    }
+
+    document.getElementById('cancelRsvpBtn')?.onclick = function() {
+        frappe.call({
+            method: 'church_platform.portal.api.rsvp_event',
+            args: { event_id: '{{ event.name }}', status: 'Declined' },
+            callback: function(r) {
+                if (r.message.status === 'success') {
+                    location.reload();
+                }
+            }
+        });
+    }
+</script>
+{% endblock %}
