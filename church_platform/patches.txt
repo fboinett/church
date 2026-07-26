@@ -1,0 +1,5 @@
+[pre_model_sync]
+# Add patch module paths here when patches are needed, for example:
+# church_platform.patches.v1_0.some_patch
+
+[post_model_sync]
