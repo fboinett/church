@@ -3,11 +3,12 @@ Readership Log DocType - Track content views and engagement
 """
 
 import frappe
+from frappe.model.document import Document
 from frappe import _
 from datetime import datetime
 
 
-class ReadershipLog(frappe.Model):
+class ReadershipLog(Document):
 	"""Log content views and track engagement metrics"""
 	
 	def validate(self):

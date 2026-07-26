@@ -3,10 +3,11 @@ Sub Region DocType (Archdeaconry level)
 """
 
 import frappe
+from frappe.model.document import Document
 from frappe import _
 
 
-class SubRegion(frappe.Model):
+class SubRegion(Document):
 	"""Church hierarchy: Archdeaconry/Sub-Region level"""
 	
 	def validate(self):

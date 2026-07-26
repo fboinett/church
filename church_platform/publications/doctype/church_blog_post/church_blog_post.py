@@ -3,11 +3,12 @@ Church Blog Post DocType - Blog posts, articles, teachings, testimonies
 """
 
 import frappe
+from frappe.model.document import Document
 from frappe import _
 from church_platform.hierarchy.permissions import get_user_hierarchy_scope, check_hierarchy_access
 
 
-class ChurchBlogPost(frappe.Model):
+class ChurchBlogPost(Document):
 	"""Blog posts and publications with moderated comments and social sharing"""
 	
 	def validate(self):

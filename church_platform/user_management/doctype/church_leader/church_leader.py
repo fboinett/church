@@ -3,11 +3,12 @@ Church Leader DocType
 """
 
 import frappe
+from frappe.model.document import Document
 from frappe import _
 from datetime import date
 
 
-class ChurchLeader(frappe.Model):
+class ChurchLeader(Document):
 	"""Church leaders at various hierarchy levels"""
 	
 	def validate(self):

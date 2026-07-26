@@ -3,12 +3,13 @@ Announcement DocType - Official communications
 """
 
 import frappe
+from frappe.model.document import Document
 from frappe import _
 from datetime import datetime
 from church_platform.hierarchy.permissions import get_user_hierarchy_scope, check_hierarchy_access
 
 
-class Announcement(frappe.Model):
+class Announcement(Document):
 	"""Official announcements and communications with hierarchy targeting"""
 	
 	def validate(self):

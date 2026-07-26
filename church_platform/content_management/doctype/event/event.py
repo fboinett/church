@@ -3,11 +3,12 @@ Event DocType - Church events and gatherings
 """
 
 import frappe
+from frappe.model.document import Document
 from frappe import _
 from church_platform.hierarchy.permissions import get_user_hierarchy_scope, check_hierarchy_access
 
 
-class Event(frappe.Model):
+class Event(Document):
 	"""Church events with hierarchy targeting and registration"""
 	
 	def validate(self):

@@ -3,10 +3,11 @@ Achievement DocType - Member recognitions and milestones
 """
 
 import frappe
+from frappe.model.document import Document
 from frappe import _
 
 
-class Achievement(frappe.Model):
+class Achievement(Document):
 	"""Member achievements, recognitions, and milestones"""
 	
 	def validate(self):

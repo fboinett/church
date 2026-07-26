@@ -3,10 +3,11 @@ Church DocType (Parish level)
 """
 
 import frappe
+from frappe.model.document import Document
 from frappe import _
 
 
-class Church(frappe.Model):
+class Church(Document):
 	"""Church hierarchy: Parish/Church level"""
 	
 	def validate(self):

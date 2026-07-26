@@ -3,11 +3,12 @@ Content Share DocType - Track social media shares and engagement
 """
 
 import frappe
+from frappe.model.document import Document
 from frappe import _
 from datetime import datetime
 
 
-class ContentShare(frappe.Model):
+class ContentShare(Document):
 	"""Track when and where content is shared on social media"""
 	
 	def validate(self):

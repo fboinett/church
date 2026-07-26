@@ -3,11 +3,12 @@ Member DocType - Church members with portal access
 """
 
 import frappe
+from frappe.model.document import Document
 from frappe import _
 from datetime import date
 
 
-class Member(frappe.Model):
+class Member(Document):
 	"""Church members with portal access"""
 	
 	def validate(self):

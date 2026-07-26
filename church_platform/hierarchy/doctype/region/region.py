@@ -3,11 +3,12 @@ Region DocType (Diocese level)
 """
 
 import frappe
+from frappe.model.document import Document
 from frappe import _
 from church_platform.hierarchy.permissions import get_user_hierarchy_scope
 
 
-class Region(frappe.Model):
+class Region(Document):
 	"""Church hierarchy: Diocese/Region level"""
 	
 	def validate(self):

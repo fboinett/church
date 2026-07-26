@@ -3,11 +3,12 @@ Blog Comment DocType - Moderated comments on blog posts
 """
 
 import frappe
+from frappe.model.document import Document
 from frappe import _
 from datetime import datetime
 
 
-class BlogComment(frappe.Model):
+class BlogComment(Document):
 	"""Comments on blog posts with moderation workflow"""
 	
 	def validate(self):
