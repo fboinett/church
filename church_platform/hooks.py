@@ -35,24 +35,24 @@ reports = [
 		"report_name": "Engagement Report",
 		"report_title": "Engagement Analytics",
 		"ref_doctype": "Church Blog Post",
-		"module": "Church Platform"
+		"module": "Church Analytics"
 	},
 	{
 		"report_name": "Share Analytics Report",
 		"report_title": "Social Media Sharing Analytics",
 		"ref_doctype": "Content Share",
-		"module": "Church Platform"
+		"module": "Church Analytics"
 	},
 	{
 		"report_name": "Events Analytics Report",
 		"report_title": "Event Analytics and Attendance",
 		"ref_doctype": "Event",
-		"module": "Church Platform"
+		"module": "Church Analytics"
 	},
 	{
 		"report_name": "Regional Performance Report",
 		"report_title": "Regional Performance Dashboard",
 		"ref_doctype": "Region",
-		"module": "Church Platform"
+		"module": "Church Analytics"
 	},
 ]
