@@ -1,0 +1,7 @@
+{
+  "name": "church_platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Church Platform ERPNext app assets",
+  "dependencies": {}
+}
