@@ -130,7 +130,7 @@ def get_trending_content(doctype, days=7):
 	Returns:
 		List of trending content with share counts
 	"""
-	from church_platform.doctypes.content_share.content_share import ContentShare
+	from church_platform.analytics.doctype.content_share.content_share import ContentShare
 	
 	trending = ContentShare.get_trending_content(doctype, int(days))
 	return trending

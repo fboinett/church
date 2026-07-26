@@ -1,5 +1,5 @@
 """
-Event DocType - Church events and gatherings
+Church Blog Post DocType - Blog posts, articles, teachings, testimonies
 """
 
 import frappe
@@ -7,11 +7,11 @@ from frappe import _
 from church_platform.hierarchy.permissions import get_user_hierarchy_scope, check_hierarchy_access
 
 
-class Event(frappe.Model):
-	"""Church events with hierarchy targeting and registration"""
+class ChurchBlogPost(frappe.Model):
+	"""Blog posts and publications with moderated comments and social sharing"""
 	
 	def validate(self):
-		"""Validate event data"""
+		"""Validate blog post data"""
 		# Validate hierarchy targeting
 		if self.target_level == 'National':
 			self.target_region = None
@@ -19,31 +19,27 @@ class Event(frappe.Model):
 			self.target_church = None
 		elif self.target_level == 'Regional':
 			if not self.target_region:
-				frappe.throw(_("Target Region is required for Regional events"))
+				frappe.throw(_("Target Region is required for Regional posts"))
 			self.target_sub_region = None
 			self.target_church = None
 		elif self.target_level == 'Sub-Regional':
 			if not self.target_sub_region:
-				frappe.throw(_("Target Sub-Region is required for Sub-Regional events"))
+				frappe.throw(_("Target Sub-Region is required for Sub-Regional posts"))
 			self.target_church = None
 		elif self.target_level == 'Local':
 			if not self.target_church:
-				frappe.throw(_("Target Church is required for Local events"))
-		
-		# Validate dates
-		if self.end_date and self.event_date and self.end_date < self.event_date:
-			frappe.throw(_("End date cannot be before event date"))
+				frappe.throw(_("Target Church is required for Local posts"))
 	
 	def on_update(self):
-		"""Log event update"""
+		"""Log blog post update"""
 		frappe.msgprint(
-			_("Event '{0}' ({1}) updated successfully").format(self.title, self.status),
+			_("Blog Post '{0}' ({1}) updated successfully").format(self.title, self.status),
 			indicator="green",
 			alert=True
 		)
 	
 	def get_visible_to_user(self, user=None):
-		"""Check if this event is visible to user"""
+		"""Check if this blog post is visible to user"""
 		if not user:
 			user = frappe.session.user
 		
@@ -60,11 +56,16 @@ class Event(frappe.Model):
 			self.target_church
 		)
 	
+	def increment_views(self):
+		"""Increment view count"""
+		self.views_count = (self.views_count or 0) + 1
+		frappe.db.set_value(self.doctype, self.name, "views_count", self.views_count)
+	
 	def get_share_links(self):
-		"""Get all social media share links for this event"""
+		"""Get all social media share links for this blog post"""
 		from church_platform.sharing.utils import ContentSharingManager
 		
-		excerpt = self.description[:160] + "..." if len(self.description) > 160 else self.description
+		excerpt = self.excerpt or (self.content[:160] + "...") if self.content else ""
 		
 		return ContentSharingManager.create_share_links(
 			self.doctype,
@@ -72,12 +73,12 @@ class Event(frappe.Model):
 			self.title,
 			excerpt,
 			self.featured_image,
-			self.organizer
+			self.author
 		)
 	
 	def get_share_stats(self):
-		"""Get sharing statistics for this event"""
-		from church_platform.doctypes.content_share.content_share import ContentShare
+		"""Get sharing statistics for this blog post"""
+		from church_platform.analytics.doctype.content_share.content_share import ContentShare
 		
 		return ContentShare.get_share_stats(self.doctype, self.name)
 	
@@ -91,3 +92,20 @@ class Event(frappe.Model):
 		
 		if member:
 			ContentSharingManager.log_share(self.doctype, self.name, member, platform, device_type=device_type)
+	
+	def get_og_meta_tags(self):
+		"""Get Open Graph meta tags for social preview"""
+		from church_platform.sharing.utils import OpenGraphMeta
+		
+		excerpt = self.excerpt or (self.content[:160] + "...") if self.content else ""
+		
+		og_tags = OpenGraphMeta.generate_tags(
+			self.doctype,
+			self.name,
+			self.title,
+			excerpt,
+			self.featured_image,
+			self.author
+		)
+		
+		return OpenGraphMeta.generate_html_meta_tags(og_tags)

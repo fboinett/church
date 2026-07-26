@@ -260,7 +260,7 @@ class ContentSharingManager:
 			share_url: URL that was shared
 			device_type: Device type (optional)
 		"""
-		from church_platform.doctypes.content_share.content_share import ContentShare
+		from church_platform.analytics.doctype.content_share.content_share import ContentShare
 		
 		return ContentShare.log_share(
 			content_type, content_id, shared_by, platform, share_url, device_type
@@ -278,6 +278,6 @@ class ContentSharingManager:
 		Returns:
 			Dictionary with share statistics
 		"""
-		from church_platform.doctypes.content_share.content_share import ContentShare
+		from church_platform.analytics.doctype.content_share.content_share import ContentShare
 		
 		return ContentShare.get_share_stats(content_type, content_id)

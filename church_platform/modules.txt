@@ -3,4 +3,3 @@ User Management
 Content Management
 Publications
 Analytics
-Doctypes

@@ -1,17 +1,18 @@
 """
-Church Blog Post DocType - Blog posts, articles, teachings, testimonies
+Announcement DocType - Official communications
 """
 
 import frappe
 from frappe import _
+from datetime import datetime
 from church_platform.hierarchy.permissions import get_user_hierarchy_scope, check_hierarchy_access
 
 
-class ChurchBlogPost(frappe.Model):
-	"""Blog posts and publications with moderated comments and social sharing"""
+class Announcement(frappe.Model):
+	"""Official announcements and communications with hierarchy targeting"""
 	
 	def validate(self):
-		"""Validate blog post data"""
+		"""Validate announcement data"""
 		# Validate hierarchy targeting
 		if self.target_level == 'National':
 			self.target_region = None
@@ -19,27 +20,31 @@ class ChurchBlogPost(frappe.Model):
 			self.target_church = None
 		elif self.target_level == 'Regional':
 			if not self.target_region:
-				frappe.throw(_("Target Region is required for Regional posts"))
+				frappe.throw(_("Target Region is required for Regional announcements"))
 			self.target_sub_region = None
 			self.target_church = None
 		elif self.target_level == 'Sub-Regional':
 			if not self.target_sub_region:
-				frappe.throw(_("Target Sub-Region is required for Sub-Regional posts"))
+				frappe.throw(_("Target Sub-Region is required for Sub-Regional announcements"))
 			self.target_church = None
 		elif self.target_level == 'Local':
 			if not self.target_church:
-				frappe.throw(_("Target Church is required for Local posts"))
+				frappe.throw(_("Target Church is required for Local announcements"))
+		
+		# Set announcement_date to now if not provided
+		if not self.announcement_date:
+			self.announcement_date = datetime.now()
 	
 	def on_update(self):
-		"""Log blog post update"""
+		"""Log announcement update and create readership log entry if published"""
 		frappe.msgprint(
-			_("Blog Post '{0}' ({1}) updated successfully").format(self.title, self.status),
+			_("Announcement '{0}' ({1}) updated successfully").format(self.title, self.status),
 			indicator="green",
 			alert=True
 		)
 	
 	def get_visible_to_user(self, user=None):
-		"""Check if this blog post is visible to user"""
+		"""Check if this announcement is visible to user"""
 		if not user:
 			user = frappe.session.user
 		
@@ -56,16 +61,11 @@ class ChurchBlogPost(frappe.Model):
 			self.target_church
 		)
 	
-	def increment_views(self):
-		"""Increment view count"""
-		self.views_count = (self.views_count or 0) + 1
-		frappe.db.set_value(self.doctype, self.name, "views_count", self.views_count)
-	
 	def get_share_links(self):
-		"""Get all social media share links for this blog post"""
+		"""Get all social media share links for this announcement"""
 		from church_platform.sharing.utils import ContentSharingManager
 		
-		excerpt = self.excerpt or (self.content[:160] + "...") if self.content else ""
+		excerpt = self.content[:160] + "..." if len(self.content) > 160 else self.content
 		
 		return ContentSharingManager.create_share_links(
 			self.doctype,
@@ -77,8 +77,8 @@ class ChurchBlogPost(frappe.Model):
 		)
 	
 	def get_share_stats(self):
-		"""Get sharing statistics for this blog post"""
-		from church_platform.doctypes.content_share.content_share import ContentShare
+		"""Get sharing statistics for this announcement"""
+		from church_platform.analytics.doctype.content_share.content_share import ContentShare
 		
 		return ContentShare.get_share_stats(self.doctype, self.name)
 	
@@ -92,20 +92,3 @@ class ChurchBlogPost(frappe.Model):
 		
 		if member:
 			ContentSharingManager.log_share(self.doctype, self.name, member, platform, device_type=device_type)
-	
-	def get_og_meta_tags(self):
-		"""Get Open Graph meta tags for social preview"""
-		from church_platform.sharing.utils import OpenGraphMeta
-		
-		excerpt = self.excerpt or (self.content[:160] + "...") if self.content else ""
-		
-		og_tags = OpenGraphMeta.generate_tags(
-			self.doctype,
-			self.name,
-			self.title,
-			excerpt,
-			self.featured_image,
-			self.author
-		)
-		
-		return OpenGraphMeta.generate_html_meta_tags(og_tags)

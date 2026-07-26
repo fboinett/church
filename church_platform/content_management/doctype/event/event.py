@@ -1,18 +1,17 @@
 """
-Announcement DocType - Official communications
+Event DocType - Church events and gatherings
 """
 
 import frappe
 from frappe import _
-from datetime import datetime
 from church_platform.hierarchy.permissions import get_user_hierarchy_scope, check_hierarchy_access
 
 
-class Announcement(frappe.Model):
-	"""Official announcements and communications with hierarchy targeting"""
+class Event(frappe.Model):
+	"""Church events with hierarchy targeting and registration"""
 	
 	def validate(self):
-		"""Validate announcement data"""
+		"""Validate event data"""
 		# Validate hierarchy targeting
 		if self.target_level == 'National':
 			self.target_region = None
@@ -20,31 +19,31 @@ class Announcement(frappe.Model):
 			self.target_church = None
 		elif self.target_level == 'Regional':
 			if not self.target_region:
-				frappe.throw(_("Target Region is required for Regional announcements"))
+				frappe.throw(_("Target Region is required for Regional events"))
 			self.target_sub_region = None
 			self.target_church = None
 		elif self.target_level == 'Sub-Regional':
 			if not self.target_sub_region:
-				frappe.throw(_("Target Sub-Region is required for Sub-Regional announcements"))
+				frappe.throw(_("Target Sub-Region is required for Sub-Regional events"))
 			self.target_church = None
 		elif self.target_level == 'Local':
 			if not self.target_church:
-				frappe.throw(_("Target Church is required for Local announcements"))
+				frappe.throw(_("Target Church is required for Local events"))
 		
-		# Set announcement_date to now if not provided
-		if not self.announcement_date:
-			self.announcement_date = datetime.now()
+		# Validate dates
+		if self.end_date and self.event_date and self.end_date < self.event_date:
+			frappe.throw(_("End date cannot be before event date"))
 	
 	def on_update(self):
-		"""Log announcement update and create readership log entry if published"""
+		"""Log event update"""
 		frappe.msgprint(
-			_("Announcement '{0}' ({1}) updated successfully").format(self.title, self.status),
+			_("Event '{0}' ({1}) updated successfully").format(self.title, self.status),
 			indicator="green",
 			alert=True
 		)
 	
 	def get_visible_to_user(self, user=None):
-		"""Check if this announcement is visible to user"""
+		"""Check if this event is visible to user"""
 		if not user:
 			user = frappe.session.user
 		
@@ -62,10 +61,10 @@ class Announcement(frappe.Model):
 		)
 	
 	def get_share_links(self):
-		"""Get all social media share links for this announcement"""
+		"""Get all social media share links for this event"""
 		from church_platform.sharing.utils import ContentSharingManager
 		
-		excerpt = self.content[:160] + "..." if len(self.content) > 160 else self.content
+		excerpt = self.description[:160] + "..." if len(self.description) > 160 else self.description
 		
 		return ContentSharingManager.create_share_links(
 			self.doctype,
@@ -73,12 +72,12 @@ class Announcement(frappe.Model):
 			self.title,
 			excerpt,
 			self.featured_image,
-			self.author
+			self.organizer
 		)
 	
 	def get_share_stats(self):
-		"""Get sharing statistics for this announcement"""
-		from church_platform.doctypes.content_share.content_share import ContentShare
+		"""Get sharing statistics for this event"""
+		from church_platform.analytics.doctype.content_share.content_share import ContentShare
 		
 		return ContentShare.get_share_stats(self.doctype, self.name)
 	
