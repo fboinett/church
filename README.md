@@ -194,7 +194,7 @@ Church Platform is licensed under the MIT License. See [LICENSE](LICENSE) for de
 
 - **Issues**: [GitHub Issues](https://github.com/fboinett/church/issues)
 - **Documentation**: [Full Docs](./DOCUMENTATION.md)
-- **Email**: admin@church.local
+- **Email**: info@instantech.co.ke
 
 ---
 
