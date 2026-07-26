@@ -1,5 +1,5 @@
-Hierarchy
-User Management
-Content Management
-Publications
-Analytics
+Church Hierarchy
+Church User Management
+Church Content
+Church Publications
+Church Analytics

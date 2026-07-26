@@ -1,0 +1,12 @@
+include requirements.txt
+include *.md
+include *.txt
+recursive-include church_platform *.css
+recursive-include church_platform *.html
+recursive-include church_platform *.js
+recursive-include church_platform *.json
+recursive-include church_platform *.md
+recursive-include church_platform *.png
+recursive-include church_platform *.py
+recursive-include church_platform *.svg
+recursive-include church_platform *.txt

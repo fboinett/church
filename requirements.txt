@@ -1,0 +1,2 @@
+# Frappe/ERPNext app dependencies.
+# Keep empty unless external Python packages are required.

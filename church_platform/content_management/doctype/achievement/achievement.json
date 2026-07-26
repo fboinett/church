@@ -1,0 +1,99 @@
+{
+  "autoname": "format:ACH-{YYYY}{MM}{DD}-{#####}",
+  "creation": "2026-07-23T19:00:00.000000",
+  "docstatus": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "title",
+    "description",
+    "member",
+    "award_date",
+    "achievement_type",
+    "issued_by",
+    "church",
+    "points",
+    "badge_image"
+  ],
+  "fields": [
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "label": "Title",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text Editor",
+      "label": "Description"
+    },
+    {
+      "fieldname": "member",
+      "fieldtype": "Link",
+      "label": "Member",
+      "options": "Member",
+      "reqd": 1
+    },
+    {
+      "fieldname": "award_date",
+      "fieldtype": "Date",
+      "label": "Award Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "achievement_type",
+      "fieldtype": "Select",
+      "label": "Achievement Type",
+      "options": "Attendance\nService\nLeadership\nLearning\nGiving\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "issued_by",
+      "fieldtype": "Link",
+      "label": "Issued By",
+      "options": "Church Leader",
+      "reqd": 1
+    },
+    {
+      "fieldname": "church",
+      "fieldtype": "Link",
+      "label": "Church",
+      "options": "Church",
+      "reqd": 1
+    },
+    {
+      "fieldname": "points",
+      "fieldtype": "Int",
+      "label": "Achievement Points"
+    },
+    {
+      "fieldname": "badge_image",
+      "fieldtype": "Attach Image",
+      "label": "Badge/Certificate Image"
+    }
+  ],
+  "links": [],
+  "modified": "2026-07-23T19:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Church Content",
+  "name": "Achievement",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "submit": 0,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

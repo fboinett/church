@@ -1,0 +1,194 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"cp_header\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Church Platform</b></span>\",\"col\":12}},{\"id\":\"cp_sc_region\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Regions\",\"col\":3}},{\"id\":\"cp_sc_subregion\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sub Regions\",\"col\":3}},{\"id\":\"cp_sc_church\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Churches\",\"col\":3}},{\"id\":\"cp_sc_members\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Members\",\"col\":3}},{\"id\":\"cp_sc_events\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Events\",\"col\":3}},{\"id\":\"cp_sc_posts\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Blog Posts\",\"col\":3}},{\"id\":\"cp_sc_ann\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Announcements\",\"col\":3}},{\"id\":\"cp_sc_leaders\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Leaders\",\"col\":3}},{\"id\":\"cp_spacer\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"cp_card_h\",\"type\":\"card\",\"data\":{\"card_name\":\"Hierarchy\",\"col\":4}},{\"id\":\"cp_card_c\",\"type\":\"card\",\"data\":{\"card_name\":\"Content\",\"col\":4}},{\"id\":\"cp_card_u\",\"type\":\"card\",\"data\":{\"card_name\":\"Users\",\"col\":4}}]",
+ "creation": "2026-07-26 00:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "organization",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Church Platform",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Hierarchy",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Region",
+   "link_count": 0,
+   "link_to": "Region",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sub Region",
+   "link_count": 0,
+   "link_to": "Sub Region",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Church",
+   "link_count": 0,
+   "link_to": "Church",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Users",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Church Leader",
+   "link_count": 0,
+   "link_to": "Church Leader",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Member",
+   "link_count": 0,
+   "link_to": "Member",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Content",
+   "link_count": 0,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Announcement",
+   "link_count": 0,
+   "link_to": "Announcement",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Event",
+   "link_count": 0,
+   "link_to": "Event",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Church Blog Post",
+   "link_count": 0,
+   "link_to": "Church Blog Post",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Blog Comment",
+   "link_count": 0,
+   "link_to": "Blog Comment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-07-26 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Church Hierarchy",
+ "name": "Church Platform",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "restrict_to_domain": "",
+ "roles": [],
+ "sequence_id": 50.0,
+ "shortcuts": [
+  {
+   "label": "Regions",
+   "link_to": "Region",
+   "type": "DocType"
+  },
+  {
+   "label": "Sub Regions",
+   "link_to": "Sub Region",
+   "type": "DocType"
+  },
+  {
+   "label": "Churches",
+   "link_to": "Church",
+   "type": "DocType"
+  },
+  {
+   "label": "Members",
+   "link_to": "Member",
+   "type": "DocType"
+  },
+  {
+   "label": "Leaders",
+   "link_to": "Church Leader",
+   "type": "DocType"
+  },
+  {
+   "label": "Announcements",
+   "link_to": "Announcement",
+   "type": "DocType"
+  },
+  {
+   "label": "Events",
+   "link_to": "Event",
+   "type": "DocType"
+  },
+  {
+   "label": "Blog Posts",
+   "link_to": "Church Blog Post",
+   "type": "DocType"
+  }
+ ],
+ "title": "Church Platform"
+}

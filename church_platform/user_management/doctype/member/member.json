@@ -1,0 +1,131 @@
+{
+  "autoname": "field:user",
+  "creation": "2026-07-23T19:00:00.000000",
+  "docstatus": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "user",
+    "first_name",
+    "last_name",
+    "email",
+    "phone",
+    "church",
+    "member_type",
+    "join_date",
+    "details_section",
+    "profile_image",
+    "bio",
+    "date_of_birth",
+    "status_section",
+    "is_active"
+  ],
+  "fields": [
+    {
+      "fieldname": "user",
+      "fieldtype": "Link",
+      "label": "User",
+      "options": "User",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "first_name",
+      "fieldtype": "Data",
+      "label": "First Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "last_name",
+      "fieldtype": "Data",
+      "label": "Last Name"
+    },
+    {
+      "fieldname": "email",
+      "fieldtype": "Email",
+      "label": "Email",
+      "reqd": 1
+    },
+    {
+      "fieldname": "phone",
+      "fieldtype": "Data",
+      "label": "Phone"
+    },
+    {
+      "fieldname": "church",
+      "fieldtype": "Link",
+      "label": "Home Church",
+      "options": "Church",
+      "reqd": 1
+    },
+    {
+      "fieldname": "member_type",
+      "fieldtype": "Select",
+      "label": "Member Type",
+      "options": "Regular\nVisitor\nAssociate",
+      "reqd": 1,
+      "default": "Regular"
+    },
+    {
+      "fieldname": "join_date",
+      "fieldtype": "Date",
+      "label": "Join Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "details_section",
+      "fieldtype": "Section Break",
+      "label": "Details"
+    },
+    {
+      "fieldname": "profile_image",
+      "fieldtype": "Attach Image",
+      "label": "Profile Image"
+    },
+    {
+      "fieldname": "bio",
+      "fieldtype": "Text",
+      "label": "Bio/Testimony"
+    },
+    {
+      "fieldname": "date_of_birth",
+      "fieldtype": "Date",
+      "label": "Date of Birth"
+    },
+    {
+      "fieldname": "status_section",
+      "fieldtype": "Section Break",
+      "label": "Status"
+    },
+    {
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "label": "Is Active",
+      "default": 1
+    }
+  ],
+  "links": [],
+  "modified": "2026-07-23T19:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Church User Management",
+  "name": "Member",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "submit": 0,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

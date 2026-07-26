@@ -1,0 +1,147 @@
+{
+  "autoname": "format:ANN-{YYYY}{MM}{DD}-{#####}",
+  "creation": "2026-07-23T19:00:00.000000",
+  "docstatus": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "title",
+    "content",
+    "author",
+    "announcement_date",
+    "category",
+    "targeting_section",
+    "target_level",
+    "target_region",
+    "target_sub_region",
+    "target_church",
+    "featured_image",
+    "status",
+    "engagement_section",
+    "allow_comments",
+    "is_global",
+    "publish_date"
+  ],
+  "fields": [
+    {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "label": "Title",
+      "reqd": 1
+    },
+    {
+      "fieldname": "content",
+      "fieldtype": "Text Editor",
+      "label": "Content",
+      "reqd": 1
+    },
+    {
+      "fieldname": "author",
+      "fieldtype": "Link",
+      "label": "Author",
+      "options": "Church Leader",
+      "reqd": 1
+    },
+    {
+      "fieldname": "announcement_date",
+      "fieldtype": "Datetime",
+      "label": "Announcement Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "category",
+      "fieldtype": "Select",
+      "label": "Category",
+      "options": "Sermon\nUpdate\nNotice\nPrayer Request\nThanksgiving",
+      "reqd": 1
+    },
+    {
+      "fieldname": "targeting_section",
+      "fieldtype": "Section Break",
+      "label": "Targeting"
+    },
+    {
+      "fieldname": "target_level",
+      "fieldtype": "Select",
+      "label": "Target Level",
+      "options": "National\nRegional\nSub-Regional\nLocal",
+      "reqd": 1
+    },
+    {
+      "fieldname": "target_region",
+      "fieldtype": "Link",
+      "label": "Target Region",
+      "options": "Region"
+    },
+    {
+      "fieldname": "target_sub_region",
+      "fieldtype": "Link",
+      "label": "Target Sub-Region",
+      "options": "Sub Region"
+    },
+    {
+      "fieldname": "target_church",
+      "fieldtype": "Link",
+      "label": "Target Church",
+      "options": "Church"
+    },
+    {
+      "fieldname": "featured_image",
+      "fieldtype": "Attach Image",
+      "label": "Featured Image"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nPublished\nArchived",
+      "default": "Draft",
+      "reqd": 1
+    },
+    {
+      "fieldname": "engagement_section",
+      "fieldtype": "Section Break",
+      "label": "Engagement"
+    },
+    {
+      "fieldname": "allow_comments",
+      "fieldtype": "Check",
+      "label": "Allow Comments",
+      "default": 1
+    },
+    {
+      "fieldname": "is_global",
+      "fieldtype": "Check",
+      "label": "Is Global (Visible to all)"
+    },
+    {
+      "fieldname": "publish_date",
+      "fieldtype": "Date",
+      "label": "Publish Date"
+    }
+  ],
+  "links": [],
+  "modified": "2026-07-23T19:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Church Content",
+  "name": "Announcement",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "submit": 0,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

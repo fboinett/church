@@ -1,0 +1,121 @@
+{
+  "autoname": "field:church_code",
+  "creation": "2026-07-23T19:00:00.000000",
+  "docstatus": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "church_code",
+    "name",
+    "sub_region",
+    "description",
+    "church_leader",
+    "denomination",
+    "founding_date",
+    "contact_section",
+    "contact_email",
+    "contact_phone",
+    "address",
+    "status_section",
+    "is_active"
+  ],
+  "fields": [
+    {
+      "fieldname": "church_code",
+      "fieldtype": "Data",
+      "label": "Church Code",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "name",
+      "fieldtype": "Data",
+      "label": "Church Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "sub_region",
+      "fieldtype": "Link",
+      "label": "Sub-Region",
+      "options": "Sub Region",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text Editor",
+      "label": "Description"
+    },
+    {
+      "fieldname": "church_leader",
+      "fieldtype": "Link",
+      "label": "Church Leader",
+      "options": "Church Leader",
+      "reqd": 1
+    },
+    {
+      "fieldname": "denomination",
+      "fieldtype": "Data",
+      "label": "Denomination/Stream"
+    },
+    {
+      "fieldname": "founding_date",
+      "fieldtype": "Date",
+      "label": "Founding Date"
+    },
+    {
+      "fieldname": "contact_section",
+      "fieldtype": "Section Break",
+      "label": "Contact Information"
+    },
+    {
+      "fieldname": "contact_email",
+      "fieldtype": "Email",
+      "label": "Contact Email"
+    },
+    {
+      "fieldname": "contact_phone",
+      "fieldtype": "Data",
+      "label": "Contact Phone"
+    },
+    {
+      "fieldname": "address",
+      "fieldtype": "Text",
+      "label": "Address"
+    },
+    {
+      "fieldname": "status_section",
+      "fieldtype": "Section Break",
+      "label": "Status"
+    },
+    {
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "label": "Is Active",
+      "default": 1
+    }
+  ],
+  "links": [],
+  "modified": "2026-07-23T19:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Church Hierarchy",
+  "name": "Church",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "submit": 0,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}
