@@ -1,0 +1,98 @@
+{
+  "autoname": "format:SHARE-{YYYY}{MM}{DD}-{#####}",
+  "creation": "2026-07-23T19:00:00.000000",
+  "docstatus": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "content_type",
+    "content_id",
+    "shared_by",
+    "platform",
+    "share_url",
+    "share_date",
+    "device_type",
+    "shared_to_email",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "content_type",
+      "fieldtype": "Select",
+      "label": "Content Type",
+      "options": "Announcement\nEvent\nBlog Post\nAchievement",
+      "reqd": 1
+    },
+    {
+      "fieldname": "content_id",
+      "fieldtype": "Data",
+      "label": "Content ID",
+      "reqd": 1
+    },
+    {
+      "fieldname": "shared_by",
+      "fieldtype": "Link",
+      "label": "Shared By",
+      "options": "Member",
+      "reqd": 1
+    },
+    {
+      "fieldname": "platform",
+      "fieldtype": "Select",
+      "label": "Platform",
+      "options": "WhatsApp\nFacebook\nTwitter\nEmail\nDirect Link\nQR Code",
+      "reqd": 1
+    },
+    {
+      "fieldname": "share_url",
+      "fieldtype": "Data",
+      "label": "Share URL"
+    },
+    {
+      "fieldname": "share_date",
+      "fieldtype": "Datetime",
+      "label": "Share Date",
+      "reqd": 1
+    },
+    {
+      "fieldname": "device_type",
+      "fieldtype": "Select",
+      "label": "Device Type",
+      "options": "Desktop\nMobile\nTablet"
+    },
+    {
+      "fieldname": "shared_to_email",
+      "fieldtype": "Email",
+      "label": "Shared To Email"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Text",
+      "label": "Notes"
+    }
+  ],
+  "links": [],
+  "modified": "2026-07-23T19:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Church Analytics",
+  "name": "Content Share",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "submit": 0,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1
+}

@@ -1,0 +1,40 @@
+{
+  "creation": "2026-07-23T19:00:00.000000",
+  "docstatus": 0,
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "attachment_type",
+    "file_attachment",
+    "description"
+  ],
+  "fields": [
+    {
+      "fieldname": "attachment_type",
+      "fieldtype": "Select",
+      "label": "Attachment Type",
+      "options": "Audio\nPDF\nVideo\nImage\nOther",
+      "reqd": 1
+    },
+    {
+      "fieldname": "file_attachment",
+      "fieldtype": "Attach",
+      "label": "File",
+      "reqd": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Data",
+      "label": "Description"
+    }
+  ],
+  "istable": 1,
+  "modified": "2026-07-23T19:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Church Publications",
+  "name": "Blog Attachment",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC"
+}
